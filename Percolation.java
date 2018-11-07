@@ -29,9 +29,21 @@ public class Percolation {
         int arrRow = row - 1;
         int arrCol = col - 1;
         grid[arrRow][arrCol] = true;
-        if (isOpen(arrRow - 1, arrCol)) {
-            wqu.union((row - 1) * nSize + (col - 1), );
-
+        if (isOpen(row - 1, col)) {
+            // check if the ABOVE element is open, if it is union/join them together
+            wqu.union(arrRow * nSize + arrCol, (arrRow - 1) * nSize + arrCol);
+        }
+        if (isOpen(row + 1, col)) {
+            // check if the element BENEATH is open, if it is union/join them together
+            wqu.union(arrRow * nSize + arrCol, row * nSize + arrCol);
+        }
+        if (isOpen(row, col - 1)) {
+            // check if the element on the left is open, if it is union/join them together
+            wqu.union(arrRow * nSize + arrCol, arrRow * nSize + arrCol - 1);
+        }
+        if (isOpen(row, col + 1)) {
+            // check if the element on the right is open, if it is union/join them together
+            wqu.union(arrRow * nSize + arrCol, arrRow * nSize + col);
         }
 
     }
